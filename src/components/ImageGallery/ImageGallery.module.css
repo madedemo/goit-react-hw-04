@@ -1,0 +1,14 @@
+.ImageGallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding-top: 25px;
+}
+
+.ImageGallery li {
+  width: 400px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}

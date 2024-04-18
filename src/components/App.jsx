@@ -1,10 +1,12 @@
 import './App.css';
-import{ useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import SearchHeader from './SearchHeader/SearchHeader';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
-import { searchPhotos } from '../components/services/api';
+import LoadMoreBtn from './LoadMoreButton/LoadMoreBtn';
+import searchPhotos from '../components/services/api';
+// import ImageModal from './ImageModal/ImageModal';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -21,7 +23,7 @@ function App() {
       setLoading(true);
       try {
         const data = await searchPhotos(query, page);
-        setImages(data);
+        setImages(prevImages => [...prevImages, ...data]);
         setError(null);
       } catch (err) {
         setError(err);
@@ -29,12 +31,17 @@ function App() {
       setLoading(false);
     };
     getPhotos();
-  },[query, page]);
+  }, [query, page]);
 
   const handleSearch = async (query) => {
     setQuery(query);
     setPage(1);
-  }
+    setImages([]);
+  };
+
+  const handlePage = () => {
+    setPage(page + 1);
+  };
 
   return (
     <div>
@@ -42,10 +49,12 @@ function App() {
         <SearchBar onSubmit={handleSearch} />
       </SearchHeader>
       {error && <p>Oops, something went wrong.</p>}
-      {loading ? <Loader /> : <ImageGallery images={images} />}
+      {loading ? <Loader /> : <ImageGallery images={images}/>}
+      {images.length > 0 && <LoadMoreBtn handlePage={handlePage} />}
     </div>
   );
 }
 
-
 export default App;
+
+
