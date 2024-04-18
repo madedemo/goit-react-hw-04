@@ -1,0 +1,17 @@
+.searchHeader {
+  background-color: #1a202c;
+  padding: 2.5rem 0;
+}
+
+.searchHeader > div {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.searchHeader h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+}
