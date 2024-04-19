@@ -7,8 +7,14 @@
 }
 
 .ImageGallery li {
+  border-radius: 25px;
   width: 400px;
-  height: 200px;
+  height: 300px;
   position: relative;
   overflow: hidden;
+}
+
+.ImageGallery li:hover {
+  transform: scale(1.05);
+  transition: 0.5s;
 }

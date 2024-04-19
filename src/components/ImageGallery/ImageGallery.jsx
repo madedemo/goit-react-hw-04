@@ -1,16 +1,13 @@
 import css from './ImageGallery.module.css';
 import ImageCard from '../ImageCard/ImageCard';
 
-const ImageGallery = ({ images, setDataForModal, setIsOpen }) => {
-  if (!images || images.length === 0) {
-    return null;
-  }
+const ImageGallery = ({ images }) => {
 
   return (
     <ul className={css.ImageGallery}>
-      {images.map((image) => (
-        <li key={image.id}>
-          <ImageCard image={image} setDataForModal={setDataForModal} setIsOpen={setIsOpen} />
+      {images.map((image, id) => (
+        <li key={id}> 
+          <ImageCard image={image} />
         </li>
       ))}
     </ul>

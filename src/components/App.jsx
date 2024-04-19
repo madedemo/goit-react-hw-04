@@ -4,7 +4,7 @@ import SearchBar from './SearchBar/SearchBar';
 import SearchHeader from './SearchHeader/SearchHeader';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
-import LoadMoreBtn from './LoadMoreButton/LoadMoreBtn';
+import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import searchPhotos from '../components/services/api';
 // import ImageModal from './ImageModal/ImageModal';
 
@@ -39,8 +39,8 @@ function App() {
     setImages([]);
   };
 
-  const handlePage = () => {
-    setPage(page + 1);
+  const handlePage =  () => {
+    setPage(prevPage => prevPage + 1);
   };
 
   return (
@@ -48,9 +48,14 @@ function App() {
       <SearchHeader>
         <SearchBar onSubmit={handleSearch} />
       </SearchHeader>
-      {error && <p>Oops, something went wrong.</p>}
-      {loading ? <Loader /> : <ImageGallery images={images}/>}
-      {images.length > 0 && <LoadMoreBtn handlePage={handlePage} />}
+      {error && <p>{error.message}</p>}
+      {images.length > 0 && (
+        <ImageGallery images={images} />
+      )}
+      {images.length > 0 && !loading && (
+        <LoadMoreBtn handleClick={handlePage} />
+      )}
+      {loading && <Loader />}
     </div>
   );
 }

@@ -12,7 +12,12 @@ const SearchBar = ({ onSubmit }) => {
           return;
         }
       onSubmit(query);
-    }
+      setQuery('');
+  }
+  
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  }
 
   return (
       <form className={css.searchBar} onSubmit={handleSubmit}>
@@ -23,7 +28,7 @@ const SearchBar = ({ onSubmit }) => {
           autoFocus
           placeholder="Search images and photos"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleChange}
         />
         <button type="submit" className={css.searchButton}>Search</button>
       </form>
